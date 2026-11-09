@@ -5,67 +5,36 @@
 			"label": "ShopAssist API tests",
 			"type": "shell",
 			"command": "C:\\Users\\DELL\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
-			"args": [
-				"-m",
-				"pytest",
-				"uvicorn",
-				"app.main:app",
-				"--reload",
-				"--host",
-				"127.0.0.1",
-				"--port",
-				"8000"
-			],
+			"args": ["-m", "pytest", "-q"],
+			"isBackground": false,
+			"group": "test"
+		},
+		{
+			"label": "ShopAssist API",
+			"type": "shell",
+			"command": "C:\\Users\\DELL\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+			"args": ["-m", "uvicorn", "app.main:app", "--reload", "--host", "127.0.0.1", "--port", "8000"],
 			"isBackground": true
 		},
 		{
 			"label": "Push ShopAssist to GitHub",
 			"type": "shell",
 			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
-			"args": [
-				"push",
-				"-u",
-				"origin",
-				"main"
-			],
-			"isBackground": false
-		},
-		{
-			"label": "Publish ShopAssist AI summary feature",
-			"type": "shell",
-			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-			"args": [
-				"-NoProfile",
-				"-Command",
-				"$git = \"C:\\Program Files\\Git\\cmd\\git.exe\"; & $git add -- app/schemas.py app/services/assistant.py app/main.py tests/test_api.py README.md .vscode/tasks.json; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; & $git commit -m \"Add AI-powered review summaries\"; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; & $git push -u origin main; exit $LASTEXITCODE"
-			],
+			"args": ["push", "-u", "origin", "main"],
 			"isBackground": false
 		},
 		{
 			"label": "Stage ShopAssist AI summary changes",
 			"type": "shell",
 			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
-			"args": [
-				"add",
-				"--",
-				"app/schemas.py",
-				"app/services/assistant.py",
-				"app/main.py",
-				"tests/test_api.py",
-				"README.md",
-				".vscode/tasks.json"
-			],
+			"args": ["add", "--", "app/schemas.py", "app/services/assistant.py", "app/main.py", "tests/test_api.py", "README.md", ".vscode/tasks.json"],
 			"isBackground": false
 		},
 		{
 			"label": "Commit ShopAssist AI summary changes",
 			"type": "shell",
 			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
-			"args": [
-				"commit",
-				"-m",
-				"Add AI-powered review summaries"
-			],
+			"args": ["commit", "-m", "Fix VS Code task configuration"],
 			"isBackground": false
 		}
 	]
