@@ -34,6 +34,7 @@ The vector integrations use OpenAI embeddings, so configure `OPENAI_API_KEY` whe
 
 - `GET /health` reports service and provider configuration.
 - `GET /api/products?q=headphones` searches the catalog.
+- `GET /api/products/{product_id}/review-summary` summarizes that product's customer reviews with GPT-4o when configured.
 - `POST /api/chat` runs the LangGraph retrieval and response workflow.
 - `POST /api/products/compare` compares two or more product IDs.
 - `POST /api/recommendations` returns catalog matches for a request.
@@ -47,6 +48,8 @@ Example chat request:
   "message": "Does the AeroSound Pro have noise cancellation?"
 }
 ```
+
+The review-summary response includes its source reviews and an `ai_generated` flag. With no `OPENAI_API_KEY`, it returns the retrieved review text and marks the response as a non-AI fallback.
 
 ## Project layout
 

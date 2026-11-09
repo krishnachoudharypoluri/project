@@ -92,3 +92,23 @@ assistant_graph = workflow.compile()
 
 def answer_question(message: str) -> AssistantState:
     return assistant_graph.invoke({"message": message})
+
+
+def summarize_reviews(product_name: str, review_documents: list[Document]) -> tuple[str, bool]:
+    review_text = "\n\n".join(document.page_content for document in review_documents)
+    settings = get_settings()
+    if settings.openai_api_key:
+        model = ChatOpenAI(model=settings.openai_model, api_key=settings.openai_api_key, temperature=0)
+        prompt = (
+            "Summarize the customer feedback for this product using only the supplied reviews. "
+            "Report recurring positives and drawbacks, avoid unsupported claims, and do not invent statistics.\n\n"
+            f"Product: {product_name}\n\nCustomer reviews:\n{review_text}"
+        )
+        response = model.invoke(prompt)
+        return str(response.content), True
+
+    return (
+        "AI summarization is disabled because OPENAI_API_KEY is not configured. "
+        f"Retrieved customer reviews:\n{review_text}",
+        False,
+    )

@@ -30,6 +30,13 @@ class ChatResponse(BaseModel):
     sources: list[Source]
 
 
+class ReviewSummaryResponse(BaseModel):
+    product_id: str
+    summary: str
+    ai_generated: bool
+    sources: list[Source]
+
+
 class CompareRequest(BaseModel):
     product_ids: list[str] = Field(min_length=2, max_length=4)
 

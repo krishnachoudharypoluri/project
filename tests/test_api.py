@@ -1,6 +1,8 @@
 from fastapi.testclient import TestClient
+from types import SimpleNamespace
 
 from app.main import app
+from app.services import assistant
 
 
 client = TestClient(app)
@@ -33,6 +35,47 @@ def test_comparison_and_order_tracking() -> None:
 
 def test_missing_order_is_not_found() -> None:
     assert client.get("/api/orders/SA-0000").status_code == 404
+
+
+def test_review_summary_returns_grounded_fallback(monkeypatch) -> None:
+    monkeypatch.setattr(assistant, "get_settings", lambda: SimpleNamespace(openai_api_key=None))
+
+    response = client.get("/api/products/aerosound-pro/review-summary")
+
+    assert response.status_code == 200
+    assert response.json()["ai_generated"] is False
+    assert "noise cancellation" in response.json()["summary"].lower()
+    assert all(
+        source["metadata"].get("product_id") == "aerosound-pro"
+        for source in response.json()["sources"]
+    )
+
+
+def test_review_summary_uses_configured_llm(monkeypatch) -> None:
+    class FakeModel:
+        def __init__(self, **_: object) -> None:
+            pass
+
+        def invoke(self, prompt: str) -> SimpleNamespace:
+            assert "AeroSound Pro customer review" in prompt
+            return SimpleNamespace(content="Customers like the noise cancellation and comfort.")
+
+    monkeypatch.setattr(
+        assistant,
+        "get_settings",
+        lambda: SimpleNamespace(openai_api_key="test-key", openai_model="gpt-4o"),
+    )
+    monkeypatch.setattr(assistant, "ChatOpenAI", FakeModel)
+
+    response = client.get("/api/products/aerosound-pro/review-summary")
+
+    assert response.status_code == 200
+    assert response.json()["ai_generated"] is True
+    assert "Customers like" in response.json()["summary"]
+
+
+def test_review_summary_returns_not_found_for_unknown_product() -> None:
+    assert client.get("/api/products/unknown/review-summary").status_code == 404
 
 
 def test_ingested_child_match_returns_parent_context() -> None:

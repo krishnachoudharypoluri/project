@@ -10,9 +10,10 @@ from app.schemas import (
     IngestRequest,
     Product,
     RecommendationRequest,
+    ReviewSummaryResponse,
     Source,
 )
-from app.services.assistant import answer_question
+from app.services.assistant import answer_question, summarize_reviews
 from app.services.catalog import find_products, get_products
 from app.services.knowledge_base import knowledge_base
 from app.services.orders import track_order
@@ -48,6 +49,34 @@ def health() -> dict[str, str | bool]:
 @app.get("/api/products", response_model=list[Product])
 def list_products(q: str = Query(default="", max_length=200)) -> list[Product]:
     return find_products(q)
+
+
+@app.get("/api/products/{product_id}/review-summary", response_model=ReviewSummaryResponse)
+def product_review_summary(product_id: str) -> ReviewSummaryResponse:
+    product = next((item for item in get_products() if item.id == product_id), None)
+    if product is None:
+        raise HTTPException(status_code=404, detail="Product not found.")
+
+    review_documents = [
+        document
+        for document in knowledge_base.search(f"{product.name} {product.id} customer review", limit=10)
+        if document.metadata.get("type") == "customer_review"
+        and document.metadata.get("product_id") == product.id
+    ]
+    if not review_documents:
+        raise HTTPException(status_code=404, detail="No customer reviews found for this product.")
+
+    try:
+        summary, ai_generated = summarize_reviews(product.name, review_documents)
+    except Exception as error:
+        raise HTTPException(status_code=503, detail="Review summarization is temporarily unavailable.") from error
+
+    return ReviewSummaryResponse(
+        product_id=product.id,
+        summary=summary,
+        ai_generated=ai_generated,
+        sources=[Source(content=document.page_content, metadata=document.metadata) for document in review_documents],
+    )
 
 
 @app.post("/api/chat", response_model=ChatResponse)
