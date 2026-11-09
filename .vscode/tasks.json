@@ -56,6 +56,17 @@
 				".vscode/tasks.json"
 			],
 			"isBackground": false
+		},
+		{
+			"label": "Commit ShopAssist AI summary changes",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"commit",
+				"-m",
+				"Add AI-powered review summaries"
+			],
+			"isBackground": false
 		}
 	]
 }
