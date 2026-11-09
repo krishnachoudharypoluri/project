@@ -1,0 +1,78 @@
+[
+  {
+    "id": "aerosound-pro",
+    "name": "AeroSound Pro",
+    "brand": "Northstar Audio",
+    "category": "Headphones",
+    "price": 249.99,
+    "currency": "USD",
+    "rating": 4.7,
+    "inventory": 18,
+    "sku": "NS-AERO-PRO-01",
+    "description": "Over-ear wireless headphones with adaptive noise cancellation and a fold-flat travel design.",
+    "specifications": {
+      "battery": "Up to 30 hours with noise cancellation enabled",
+      "connectivity": "Bluetooth 5.3, USB-C audio, multipoint pairing",
+      "noise_cancellation": "Adaptive active noise cancellation",
+      "weight": "265 g",
+      "warranty": "2 years"
+    }
+  },
+  {
+    "id": "aerosound-lite",
+    "name": "AeroSound Lite",
+    "brand": "Northstar Audio",
+    "category": "Headphones",
+    "price": 129.99,
+    "currency": "USD",
+    "rating": 4.4,
+    "inventory": 42,
+    "sku": "NS-AERO-LITE-02",
+    "description": "Lightweight wireless headphones with clear calls, comfortable ear cushions, and long battery life.",
+    "specifications": {
+      "battery": "Up to 40 hours",
+      "connectivity": "Bluetooth 5.2, USB-C charging",
+      "noise_cancellation": "Passive isolation",
+      "weight": "218 g",
+      "warranty": "1 year"
+    }
+  },
+  {
+    "id": "trailwatch-3",
+    "name": "TrailWatch 3",
+    "brand": "Fieldworks",
+    "category": "Wearables",
+    "price": 199.00,
+    "currency": "USD",
+    "rating": 4.5,
+    "inventory": 11,
+    "sku": "FW-TW3-GR",
+    "description": "A durable GPS smartwatch with heart-rate tracking, route navigation, and a bright outdoor display.",
+    "specifications": {
+      "battery": "Up to 7 days; 20 hours in GPS mode",
+      "connectivity": "Bluetooth, GPS, USB-C charging dock",
+      "water_resistance": "5 ATM",
+      "weight": "49 g",
+      "warranty": "2 years"
+    }
+  },
+  {
+    "id": "homehub-mini",
+    "name": "HomeHub Mini",
+    "brand": "Cedar Home",
+    "category": "Smart Home",
+    "price": 79.00,
+    "currency": "USD",
+    "rating": 4.2,
+    "inventory": 0,
+    "sku": "CH-HH-MINI-WH",
+    "description": "A compact smart speaker for room audio, voice-controlled timers, and compatible home devices.",
+    "specifications": {
+      "connectivity": "Wi-Fi, Bluetooth 5.0",
+      "speaker": "40 mm full-range driver",
+      "power": "USB-C adapter included",
+      "dimensions": "95 x 95 x 82 mm",
+      "warranty": "1 year"
+    }
+  }
+]

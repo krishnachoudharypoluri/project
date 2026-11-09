@@ -1,0 +1,33 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "ShopAssist API tests",
+			"type": "shell",
+			"command": "C:\\Users\\DELL\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+			"args": [
+				"-m",
+				"pytest",
+				"-q"
+			],
+			"isBackground": false,
+			"group": "test"
+		},
+		{
+			"label": "ShopAssist API",
+			"type": "shell",
+			"command": "C:\\Users\\DELL\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+			"args": [
+				"-m",
+				"uvicorn",
+				"app.main:app",
+				"--reload",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"8000"
+			],
+			"isBackground": true
+		}
+	]
+}

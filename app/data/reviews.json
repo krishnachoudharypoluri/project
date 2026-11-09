@@ -1,0 +1,14 @@
+[
+  {
+    "content": "AeroSound Pro customer review: The noise cancellation makes train commutes much quieter, and the ear cushions remain comfortable on long trips. Battery lasts several workdays. One reviewer wished the case were smaller.",
+    "metadata": {"product_id": "aerosound-pro", "rating": 5, "source": "verified customer review"}
+  },
+  {
+    "content": "AeroSound Lite customer review: Lightweight and easy to wear for calls. Battery life is excellent for the price. It does not have active noise cancellation, so it is less effective in loud environments.",
+    "metadata": {"product_id": "aerosound-lite", "rating": 4, "source": "verified customer review"}
+  },
+  {
+    "content": "TrailWatch 3 customer review: GPS route tracking is reliable on hikes, and the outdoor display is readable in sunlight. GPS workouts use more battery than everyday smartwatch use.",
+    "metadata": {"product_id": "trailwatch-3", "rating": 5, "source": "verified customer review"}
+  }
+]
